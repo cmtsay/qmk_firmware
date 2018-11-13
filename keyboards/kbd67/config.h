@@ -1,34 +1,35 @@
-/* Copyright 2018 Jason Williams (Wilba)
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 2 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
+/*
+Copyright 2018 MechMerlin
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 2 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
 
 #pragma once
 
 #include "config_common.h"
 
 /* USB Device descriptor parameter */
-#define VENDOR_ID       0x6582 // wilba.tech
-#define PRODUCT_ID      0x060A // 60-A
+#define VENDOR_ID       0xFEED
+#define PRODUCT_ID      0x0000
 #define DEVICE_VER      0x0001
-#define MANUFACTURER    wilba.tech
-#define PRODUCT         wilba.tech WT60-A
-#define DESCRIPTION     wilba.tech WT60-A
+#define MANUFACTURER    kbdfans
+#define PRODUCT         kbd67
+#define DESCRIPTION     65% Keyboard
 
 /* key matrix size */
 #define MATRIX_ROWS 5
-#define MATRIX_COLS 14
+#define MATRIX_COLS 16
 
 /*
  * Keyboard Matrix Assignments
@@ -40,17 +41,38 @@
  *                  ROW2COL = ROW = Anode (+), COL = Cathode (-, marked on diode)
  *
 */
-#define MATRIX_ROW_PINS { F0, E6, F4, F6, F7 }
-#define MATRIX_COL_PINS { F5, D5, B1, B2, B3, D3, D2, C7, C6, B6, B5, B4, D7, D6 }
+#define MATRIX_ROW_PINS { D0, D1, D2, D3, D5 }
+#define MATRIX_COL_PINS { F0, F1, E6, C7, C6, B7, D4, B1, B0, B5, B4, D7, D6, B3, F4, F5 }
 #define UNUSED_PINS
 
 /* COL2ROW, ROW2COL, or CUSTOM_MATRIX */
-#define DIODE_DIRECTION ROW2COL
- 
-// #define BACKLIGHT_PIN B7
-// #define BACKLIGHT_BREATHING
-// #define BACKLIGHT_LEVELS 3
+#define DIODE_DIRECTION COL2ROW
 
+#define BACKLIGHT_PIN B6
+#define BACKLIGHT_BREATHING
+#define BACKLIGHT_LEVELS 3
+
+#define RGB_DI_PIN E2
+#ifdef RGB_DI_PIN
+  #define RGBLED_NUM 20
+  #define RGBLIGHT_HUE_STEP 8
+  #define RGBLIGHT_SAT_STEP 8
+  #define RGBLIGHT_VAL_STEP 8
+  #define RGBLIGHT_LIMIT_VAL 180 /* The maximum brightness level */
+  // #define RGBLIGHT_SLEEP  /* If defined, the RGB lighting will be switched off when the host goes to sleep */
+/*== all animations enable ==*/
+  #define RGBLIGHT_ANIMATIONS
+/*== or choose animations ==*/
+  // #define RGBLIGHT_EFFECT_BREATHING
+  // #define RGBLIGHT_EFFECT_RAINBOW_MOOD
+  // #define RGBLIGHT_EFFECT_RAINBOW_SWIRL
+  // #define RGBLIGHT_EFFECT_SNAKE
+  // #define RGBLIGHT_EFFECT_KNIGHT
+  // #define RGBLIGHT_EFFECT_CHRISTMAS
+  // #define RGBLIGHT_EFFECT_STATIC_GRADIENT
+  // #define RGBLIGHT_EFFECT_RGB_TEST
+  // #define RGBLIGHT_EFFECT_ALTERNATING
+#endif
 
 /* Debounce reduces chatter (unintended double-presses) - set 0 if debouncing is not needed */
 #define DEBOUNCING_DELAY 5
@@ -185,20 +207,34 @@
 /* override number of MIDI tone keycodes (each octave adds 12 keycodes and allocates 12 bytes) */
 //#define MIDI_TONE_KEYCODE_OCTAVES 1
 
-#define DYNAMIC_KEYMAP_LAYER_COUNT 4
+/*
+ * HD44780 LCD Display Configuration
+ */
+/*
+#define LCD_LINES           2     //< number of visible lines of the display
+#define LCD_DISP_LENGTH    16     //< visibles characters per line of the display
 
-// EEPROM usage
+#define LCD_IO_MODE      1            //< 0: memory mapped mode, 1: IO port mode
 
-// TODO: refactor with new user EEPROM code (coming soon)
-#define EEPROM_MAGIC 0x451F
-#define EEPROM_MAGIC_ADDR 32
-// Bump this every time we change what we store
-// This will automatically reset the EEPROM with defaults
-// and avoid loading invalid data from the EEPROM
-#define EEPROM_VERSION 0x07
-#define EEPROM_VERSION_ADDR 34
+#if LCD_IO_MODE
+#define LCD_PORT         PORTB        //< port for the LCD lines
+#define LCD_DATA0_PORT   LCD_PORT     //< port for 4bit data bit 0
+#define LCD_DATA1_PORT   LCD_PORT     //< port for 4bit data bit 1
+#define LCD_DATA2_PORT   LCD_PORT     //< port for 4bit data bit 2
+#define LCD_DATA3_PORT   LCD_PORT     //< port for 4bit data bit 3
+#define LCD_DATA0_PIN    4            //< pin for 4bit data bit 0
+#define LCD_DATA1_PIN    5            //< pin for 4bit data bit 1
+#define LCD_DATA2_PIN    6            //< pin for 4bit data bit 2
+#define LCD_DATA3_PIN    7            //< pin for 4bit data bit 3
+#define LCD_RS_PORT      LCD_PORT     //< port for RS line
+#define LCD_RS_PIN       3            //< pin  for RS line
+#define LCD_RW_PORT      LCD_PORT     //< port for RW line
+#define LCD_RW_PIN       2            //< pin  for RW line
+#define LCD_E_PORT       LCD_PORT     //< port for Enable line
+#define LCD_E_PIN        1            //< pin  for Enable line
+#endif
+*/
 
-// Backlight config starts after EEPROM version
-#define RGB_BACKLIGHT_CONFIG_EEPROM_ADDR 35
-// Dynamic keymap starts after backlight config (35+37)
-#define DYNAMIC_KEYMAP_EEPROM_ADDR 72
+/* Bootmagic Lite key configuration */
+// #define BOOTMAGIC_LITE_ROW 0
+// #define BOOTMAGIC_LITE_COLUMN 0
