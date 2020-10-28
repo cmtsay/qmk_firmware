@@ -1,4 +1,4 @@
-/* Copyright 2019 HnahKB
+/* Copyright 2020 Daniel Reibl <janos.daniel.reibl@protonmail.com>
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -14,23 +14,28 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "stella.h"
+#pragma once
 
-void matrix_init_kb(void) {
-    matrix_init_user();
-    led_init_ports();
-};
+#include "config_common.h"
 
-void led_init_ports(void) {
-    setPinOutput(B3);
-    setPinOutput(B7);
-}
+#define VENDOR_ID 0xFEED
+#define PRODUCT_ID 0x002B
+#define DEVICE_VER 0x0001
+#define MANUFACTURER Riblee
+#define PRODUCT Handwired F411
 
-bool led_update_kb(led_t led_state) {
-    if (led_update_user(led_state)) {
-        writePin(B3, !led_state.caps_lock);
-        writePin(B7, !led_state.scroll_lock);
-    }
+#define MATRIX_ROWS 5
+#define MATRIX_COLS 12
 
-    return true;
-}
+#define MATRIX_ROW_PINS { A6, A5, A4, A3, A2 }
+#define MATRIX_COL_PINS { B10, B1, B0, B15, A8, B3, B4, B5, B6, B7, B8, B9 }
+#define UNUSED_PINS
+
+#define DIODE_DIRECTION COL2ROW
+
+#define BACKLIGHT_PIN           A1
+#define BACKLIGHT_LEVELS         5
+
+#define MOUSEKEY_INTERVAL 32
+
+#define TAPPING_TERM 175
