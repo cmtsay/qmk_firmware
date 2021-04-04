@@ -481,9 +481,20 @@ void rgblight_sethsv_eeprom_helper(uint8_t hue, uint8_t sat, uint8_t val, bool w
         rgblight_status.base_mode = mode_base_table[rgblight_config.mode];
         if (rgblight_config.mode == RGBLIGHT_MODE_STATIC_LIGHT) {
             // same static color
+#ifdef RGBLIGHT_CAJAL
+            uint8_t val_adj = val;
+            for (int i = 0; i < rgblight_ranges.effect_num_leds; i++) {
+                LED_TYPE *ledp = led + i;
+                if (i == 1 || i == 2) val_adj = val * 0.5;
+                else val_adj = val;
+                sethsv(hue, sat, val_adj, ledp);
+            }
+            rgblight_set();
+#else
             LED_TYPE tmp_led;
             sethsv(hue, sat, val, &tmp_led);
             rgblight_setrgb(tmp_led.r, tmp_led.g, tmp_led.b);
+#endif
         } else {
             // all LEDs in same color
             if (1 == 0) {  // dummy
