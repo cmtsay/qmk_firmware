@@ -17,7 +17,7 @@
 #include QMK_KEYBOARD_H
 enum {
   TD_RUNREGRESS = 0,
-  TD_RGB = 0
+  TD_RGB = 1
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
