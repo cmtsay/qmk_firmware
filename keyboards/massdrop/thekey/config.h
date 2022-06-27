@@ -21,7 +21,7 @@
 /* USB Device descriptor parameter */
 #define VENDOR_ID       0xFEED
 #define PRODUCT_ID      0x0000
-#define DEVICE_VER      0x0001
+#define DEVICE_VER      0x0002
 #define MANUFACTURER    Drop
 #define PRODUCT         The Key
 
@@ -37,13 +37,15 @@
 
 #define DIODE_DIRECTION ROW2COL
 
-#define BACKLIGHT_PIN B6
-#define BACKLIGHT_LEVELS 3
+//#define BACKLIGHT_PIN B6
+//#define BACKLIGHT_LEVELS 3
 
 #define RGB_DI_PIN B1
-#define RGBLED_NUM 2
+#define RGBLED_NUM 5
+#define RGBLIGHT_ANIMATIONS
 #define RGBLIGHT_HUE_STEP 8
 #define RGBLIGHT_SAT_STEP 8
 #define RGBLIGHT_VAL_STEP 8
 #define RGBLIGHT_LIMIT_VAL 255 /* The maximum brightness level */
 #define RGBLIGHT_SLEEP  /* If defined, the RGB lighting will be switched off when the host goes to sleep */
+#define RGBLIGHT_LED_MAP {1, 2, 3, 4, 0}
