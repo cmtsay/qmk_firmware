@@ -17,12 +17,13 @@
 #include QMK_KEYBOARD_H
 enum {
   TD_RUNREGRESS = 0,
-  TD_RGB = 1
+  TD_RGB = 1,
+  TD_C = 2
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
-    [0] = LAYOUT(TD(TD_RUNREGRESS), KC_SPACE, TD(TD_RGB)),
+    [0] = LAYOUT(TD(TD_RUNREGRESS), TD(TD_C), TD(TD_RGB)),
 
 };
 
@@ -59,8 +60,10 @@ void td_rgb(qk_tap_dance_state_t *state, void *user_data) {
     }
 }
 
+
 qk_tap_dance_action_t tap_dance_actions[] = {
     // Tap once for A, twice for B
     [TD_RUNREGRESS] = ACTION_TAP_DANCE_FN(runRegress),
     [TD_RGB] = ACTION_TAP_DANCE_FN(td_rgb),
+    [TD_C] = ACTION_TAP_DANCE_DOUBLE(KC_SPACE, KC_MPLY),
 };
