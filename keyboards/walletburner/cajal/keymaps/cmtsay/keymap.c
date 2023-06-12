@@ -70,7 +70,7 @@ bool led_update_user(led_t led_state) {
     writePin(B5, led_state.caps_lock);
     return false;
 }
-
+/*
 bool encoder_update_user(uint8_t index, bool clockwise) {
     if (index == 0) {
         if (clockwise) {
@@ -81,3 +81,4 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
     }
     return true;
 }
+*/
