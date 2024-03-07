@@ -16,18 +16,8 @@
 
 #pragma once
 
-#define RGB_MATRIX_LED_COUNT 14
-
-#define RGB_DISABLE_WHEN_USB_SUSPENDED
-
-#define RGB_MATRIX_FRAMEBUFFER_EFFECTS
-
-#define RGB_DI_PIN B1
-#define RGBLED_NUM 5
-#define RGBLIGHT_ANIMATIONS
-#define RGBLIGHT_HUE_STEP 8
-#define RGBLIGHT_SAT_STEP 8
-#define RGBLIGHT_VAL_STEP 8
-#define RGBLIGHT_LIMIT_VAL 255 /* The maximum brightness level */
-#define RGBLIGHT_SLEEP  /* If defined, the RGB lighting will be switched off when the host goes to sleep */
-#define RGBLIGHT_LED_MAP {1, 2, 3, 4, 0}
+#define WS2812_PWM_DRIVER PWMD4
+#define WS2812_PWM_CHANNEL 4
+#define WS2812_PWM_PAL_MODE 2
+#define WS2812_DMA_STREAM STM32_DMA1_STREAM7
+#define WS2812_DMA_CHANNEL 7
